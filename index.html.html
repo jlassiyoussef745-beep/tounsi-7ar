@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tounsi 7ar — Barcha 7ar, barcha Tounsi</title>
+<meta name="description" content="Goodies, vêtements et saveurs 100% tounsi. Paiement à la livraison dans les 24 gouvernorats.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--r1:#F0451F;--r2:#C1121F;--b1:#7A0C1E;--b2:#3D0510;--gold:#F6B73C;--cream:#FFF1E4;--tilt:30deg}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:16px/1.6 'Cairo',system-ui,sans-serif;color:var(--cream);background:linear-gradient(165deg,var(--r2) 0%,var(--b1) 45%,var(--b2) 100%) fixed;min-height:100vh;overflow-x:hidden}
+h1,h2,h3,.logo{font-family:'Lalezar','Cairo',sans-serif;font-weight:400;line-height:1.05}
+a{color:inherit}button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1120px;margin:auto;padding:0 20px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 4l6 14 14-6-6 14 14 6-14 6 6 14-14-6-6 14-6-14-14 6 6-14-14-6 14-6-6-14 14 6z' fill='none' stroke='%23fff' stroke-opacity='.06'/%3E%3C/svg%3E")}
+header,main,footer{position:relative;z-index:1}
+#glow{position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;background:radial-gradient(circle,rgba(255,120,60,.28),transparent 65%);pointer-events:none;z-index:0}
+@media(hover:none){#glow{display:none}}
+
+/* header + logo with tilted chechia */
+header{position:sticky;top:0;z-index:20;background:rgba(61,5,16,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.1)}
+.bar{display:flex;align-items:center;gap:16px;height:72px}
+.logo{font-size:2.1rem;text-decoration:none;direction:ltr;padding-top:10px;white-space:nowrap}
+.logo{background:linear-gradient(90deg,var(--cream),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ho{position:relative;display:inline-block}
+.hat{position:absolute;width:.8em;height:.8em;left:50%;top:-.62em;margin-left:-.42em;transform:rotate(var(--tilt));transform-origin:50% 90%;transition:transform .3s}
+.logo:hover .hat{animation:wob .7s ease}
+@keyframes wob{50%{transform:rotate(calc(var(--tilt) + 18deg)) translateY(-4px)}}
+nav{margin-inline-start:auto;display:flex;gap:18px;align-items:center}
+nav a{text-decoration:none;font-weight:600;opacity:.9}nav a:hover{color:var(--gold)}
+@media(max-width:700px){nav a.hide{display:none}}
+
+.btn{position:relative;overflow:hidden;border:0;background:var(--gold);color:var(--b2);font-weight:800;padding:11px 22px;border-radius:99px;text-decoration:none;display:inline-block;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 24px rgba(246,183,60,.4)}
+.btn::after{content:"";position:absolute;top:0;left:-70%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-20deg)}
+.btn:hover::after{left:140%;transition:left .6s}
+.btn.ghost{background:transparent;color:var(--cream);border:2px solid rgba(255,255,255,.35)}
+.lang{padding:6px 14px;font-size:.9rem}
+#count{background:var(--b2);color:var(--gold);border-radius:99px;padding:0 8px;margin-inline-start:6px;font-size:.85rem}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;min-height:84vh;padding:48px 0}
+.kick{display:inline-flex;gap:8px;align-items:center;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.2);padding:4px 14px;border-radius:99px;font-weight:600;margin-bottom:18px}
+.kick svg{width:20px;height:20px}
+.hero h1{font-size:clamp(3rem,8.5vw,6.2rem);background:linear-gradient(100deg,#fff 0%,var(--gold) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:18px}
+.hero p{max-width:46ch;font-size:1.15rem;opacity:.95;margin-bottom:26px}
+.hero .btn+.btn{margin-inline-start:10px}
+.mapbox{position:relative;aspect-ratio:210/305;width:min(100%,360px);margin:auto}
+.mapbox>svg.m{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 26px rgba(240,69,31,.55))}
+.hm{fill:url(#mg);stroke:var(--gold);stroke-width:1.6;stroke-linejoin:round}
+.city{cursor:pointer}
+.city .ring{fill:none;stroke:var(--gold);transform-box:fill-box;transform-origin:center;animation:ping 2.2s infinite}
+.city .dot{fill:var(--gold);stroke:var(--b2);stroke-width:1.5;transition:transform .2s;transform-box:fill-box;transform-origin:center}
+.city:hover .dot,.city:focus .dot{transform:scale(1.7)}
+@keyframes ping{0%{transform:scale(.6);opacity:1}100%{transform:scale(3);opacity:0}}
+#tip{position:absolute;transform:translate(-50%,-135%);background:var(--cream);color:var(--b2);font-weight:800;padding:4px 12px;border-radius:99px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s}
+.fl{position:absolute;width:26%;animation:fly 5s ease-in-out infinite}
+.fl.a{left:-14%;top:6%}.fl.b{right:-12%;bottom:8%;animation-delay:-2s}.fl.c{right:-6%;top:-4%;width:20%;animation-delay:-3.5s}
+@keyframes fly{50%{transform:translateY(-16px) rotate(6deg)}}
+.mhint{text-align:center;margin-top:10px;font-size:.9rem;opacity:.85}
+@media(max-width:760px){.hero{grid-template-columns:1fr;min-height:0}.fl.a{left:0}.fl.b{right:0}.fl.c{right:4%}}
+
+/* marquee */
+.mq{background:var(--gold);color:var(--b2);overflow:hidden;direction:ltr;transform:rotate(-1.2deg);margin:10px -10px;font:400 1.5rem 'Lalezar',sans-serif}
+.mq div{display:flex;gap:36px;width:max-content;padding:8px 0;animation:mq 28s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+section{padding:64px 0}
+h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:28px}
+
+/* product cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px}
+.card{--mx:50%;--my:50%;position:relative;overflow:hidden;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:18px;display:flex;flex-direction:column;transition:transform .15s,box-shadow .3s,border-color .3s}
+.card::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(circle at var(--mx) var(--my),rgba(255,190,110,.3),transparent 55%)}
+.card:hover{border-color:var(--gold);box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.card:hover::before{opacity:1}
+.art{position:relative;aspect-ratio:1;display:grid;place-items:center;overflow:hidden}
+.art>svg{width:62%;height:62%;transition:transform .35s cubic-bezier(.3,1.6,.5,1);filter:drop-shadow(0 8px 12px rgba(0,0,0,.35))}
+.card:hover .art>svg{transform:scale(1.16) rotate(-7deg)}
+.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.art .mp{fill:var(--gold)}
+.badge{position:absolute;top:12px;inset-inline-end:12px;z-index:3;background:var(--b2);color:var(--gold);font-weight:800;padding:3px 12px;border-radius:99px}
+.card .in{padding:14px 16px 18px;display:flex;flex-direction:column;gap:2px;flex:1}
+.card h3{font-size:1.4rem}
+.tag{color:var(--gold);font-weight:600;font-size:.9rem}
+.card .btn{margin-top:12px;width:100%}
+.steam{animation:st 2.4s infinite;opacity:0}.steam:nth-of-type(2){animation-delay:.8s}.steam:nth-of-type(3){animation-delay:1.6s}
+@keyframes st{0%{opacity:0;transform:translateY(6px)}50%{opacity:.8}100%{opacity:0;transform:translateY(-8px)}}
+
+/* trust + story + faq */
+.trust{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:center;padding:18px 20px;font-weight:600;background:rgba(0,0,0,.25)}
+.story{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:center;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:32px}
+.story svg{width:100%;animation:fly 6s ease-in-out infinite}
+@media(max-width:700px){.story{grid-template-columns:1fr;text-align:center}.story svg{max-width:150px;margin:auto}}
+details{border-bottom:1px solid rgba(255,255,255,.18);padding:14px 0}
+summary{font-weight:800;cursor:pointer;font-size:1.1rem}details p{margin-top:8px;opacity:.92}
+
+footer{background:var(--b2);padding:48px 0 28px;margin-top:40px}
+footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px}
+footer h3{color:var(--gold);font-size:1.2rem;margin-bottom:8px}
+footer a{display:block;text-decoration:none;padding:2px 0;opacity:.85}footer a:hover{opacity:1;color:var(--gold)}
+.copy{margin-top:30px;font-size:.85rem;opacity:.65}
+
+/* cart drawer */
+#drawer{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:var(--b2);color:var(--cream);z-index:40;transform:translateX(105%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.5)}
+[dir=rtl] #drawer{inset:0 auto 0 0;transform:translateX(-105%)}
+#drawer.open{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.15)}
+.dh h3{font-size:1.6rem}.dh button{background:none;border:0;font-size:1.8rem;color:var(--cream)}
+.db{padding:16px 20px;overflow:auto;flex:1}
+.line{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.line .n{flex:1}.q{display:flex;align-items:center;gap:8px}
+.q button{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:none;color:var(--cream)}
+.sum{padding:14px 20px;border-top:1px solid rgba(255,255,255,.15)}
+.sum div{display:flex;justify-content:space-between}.sum .tot{font-weight:800;font-size:1.2rem;color:var(--gold)}
+#ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:30;display:none}#ov.open{display:block}
+form{display:grid;gap:12px;padding:16px 20px;overflow:auto}
+label{font-size:.9rem;font-weight:600;display:grid;gap:4px}
+input,select,textarea{font:inherit;padding:10px 12px;border:0;border-radius:10px;width:100%;background:#fff;color:#2a060c}
+.cod{background:rgba(246,183,60,.15);border:1px solid var(--gold);border-radius:10px;padding:10px 12px;font-size:.9rem}
+.msg{padding:0 20px 16px;color:var(--gold);font-weight:800}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div id="glow"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF5A36"/><stop offset=".55" stop-color="#C1121F"/><stop offset="1" stop-color="#5A0A18"/></linearGradient>
+<symbol id="chechia" viewBox="0 0 100 100"><path d="M24 90L30 32C30 18 70 18 70 32L76 90Z" fill="#D7261E"/><ellipse cx="50" cy="29" rx="20" ry="7" fill="#F2503F"/><path d="M24 90l1.5-14h49L76 90Z" fill="#9E1B16"/><path d="M50 25C68 16 84 32 80 58" fill="none" stroke="#161616" stroke-width="3" stroke-linecap="round"/><path d="M80 58l-5 17M80 58v19M80 58l5 17" stroke="#161616" stroke-width="3" stroke-linecap="round"/><circle cx="80" cy="58" r="4" fill="#161616"/></symbol>
+<symbol id="chili" viewBox="0 0 100 100"><path d="M60 14c14 2 20 14 14 30-8 22-24 40-50 46 10-14 14-28 16-42 2-14 8-30 20-34z" fill="#E02A1E"/><path d="M62 22c6 4 8 12 5 20" stroke="#FF8A70" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M60 14c-3-7 1-12 9-12-1 5 1 8 6 10z" fill="#3E8E41"/></symbol>
+<symbol id="jar" viewBox="0 0 100 100"><rect x="22" y="32" width="56" height="58" rx="12" fill="#C1121F"/><rect x="18" y="18" width="64" height="16" rx="5" fill="#F6B73C"/><rect x="31" y="48" width="38" height="28" rx="5" fill="#FFF1E4"/><path d="M36 62q7-9 14 0t14 0" stroke="#C1121F" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M70 14c4-4 10-4 12 0" stroke="#3E8E41" stroke-width="3" fill="none"/></symbol>
+<symbol id="bowl" viewBox="0 0 100 100"><path class="steam" d="M36 30q-6-8 0-14" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><path class="steam" d="M50 28q-6-8 0-14" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><path class="steam" d="M64 30q-6-8 0-14" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M8 50h84c0 26-19 40-42 40S8 76 8 50z" fill="#F6B73C"/><ellipse cx="50" cy="50" rx="42" ry="9" fill="#E9CF94"/><circle cx="24" cy="49" r="4" fill="#D9B46A"/><circle cx="34" cy="53" r="4" fill="#D9B46A"/><circle cx="68" cy="53" r="4" fill="#D9B46A"/><circle cx="78" cy="49" r="4" fill="#D9B46A"/><ellipse cx="50" cy="48" rx="14" ry="7" fill="#fff"/><circle cx="50" cy="47" r="4.5" fill="#F6B73C"/><path d="M30 56q8-5 16 0t16 0" stroke="#C1121F" stroke-width="3.5" fill="none" stroke-linecap="round"/></symbol>
+<symbol id="hannibal" viewBox="0 0 100 100"><g fill="#F6B73C"><ellipse cx="58" cy="52" rx="30" ry="22"/><circle cx="28" cy="44" r="15"/><path d="M18 52q-14 8-8 28 5 3 7-2-3-13 9-20z"/><rect x="34" y="66" width="10" height="24" rx="4"/><rect x="62" y="66" width="10" height="24" rx="4"/><rect x="48" y="68" width="9" height="20" rx="4" opacity=".7"/></g><ellipse cx="38" cy="46" rx="8" ry="12" fill="#D9961F"/><path d="M24 56q-5 9 5 13" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="26" cy="41" r="2.2" fill="#3D0510"/><path d="M66 32h14v10H66z" fill="#C1121F"/><path d="M62 32l11-9 11 9z" fill="#E02A1E"/></symbol>
+</defs></svg>
+
+<header><div class="wrap bar">
+  <a class="logo brandlogo" href="#top" aria-label="Accueil"></a>
+  <nav>
+    <a class="hide" href="#shop" data-i="nav_shop"></a>
+    <a class="hide" href="#map" data-i="nav_map"></a>
+    <a class="hide" href="#faq" data-i="nav_faq"></a>
+    <button class="btn ghost lang" id="langBtn" aria-label="Langue / اللغة">العربية</button>
+    <button class="btn" id="cartBtn"><span data-i="cart"></span><span id="count">0</span></button>
+  </nav>
+</div></header>
+
+<main id="top">
+  <div class="wrap hero" id="map">
+    <div>
+      <span class="kick"><svg><use href="#chili"/></svg><span data-i="kick"></span></span>
+      <h1 data-i="h1"></h1>
+      <p data-i="hero_p"></p>
+      <a class="btn" href="#shop" data-i="cta"></a><span class="btn ghost" data-i="pay" style="cursor:default"></span>
+    </div>
+    <div>
+      <div class="mapbox" id="mapbox">
+        <svg class="fl a" viewBox="0 0 100 100"><use href="#chili"/></svg>
+        <svg class="fl b" viewBox="0 0 100 100"><use href="#jar"/></svg>
+        <svg class="fl c" viewBox="0 0 100 100"><use href="#chechia"/></svg>
+        <svg class="m" viewBox="0 0 210 305" role="img" aria-label="Carte de la Tunisie"><path class="hm mp"/><g id="cities"></g></svg>
+        <div id="tip"></div>
+      </div>
+      <p class="mhint" data-i="map_p"></p>
+    </div>
+  </div>
+
+  <div class="mq"><div id="mqin"></div></div>
+  <div class="trust"><span data-i="t1"></span><span data-i="t2"></span><span data-i="t3"></span></div>
+
+  <section id="shop"><div class="wrap">
+    <h2 data-i="shop"></h2>
+    <div class="grid" id="products"></div>
+  </div></section>
+
+  <section><div class="wrap story">
+    <svg viewBox="0 0 100 100"><use href="#hannibal"/></svg>
+    <div><h2 style="margin-bottom:10px" data-i="story_h"></h2><p data-i="story_p"></p></div>
+  </div></section>
+
+  <section id="faq"><div class="wrap" style="max-width:760px">
+    <h2 data-i="nav_faq"></h2>
+    <details><summary data-i="f1q"></summary><p data-i="f1a"></p></details>
+    <details><summary data-i="f2q"></summary><p data-i="f2a"></p></details>
+    <details><summary data-i="f3q"></summary><p data-i="f3a"></p></details>
+  </div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div><h3 class="logo brandlogo" style="font-size:1.8rem"></h3><p data-i="foot"></p></div>
+    <div><h3 data-i="contact"></h3>
+      <a href="https://wa.me/21620000000" target="_blank" rel="noopener">WhatsApp : +216 20 000 000</a>
+      <a href="mailto:contact@tounsi7ar.tn">contact@tounsi7ar.tn</a><span>Tunis, Tunisie</span></div>
+    <div><h3 data-i="follow"></h3>
+      <a href="https://instagram.com/tounsi7ar" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://facebook.com/tounsi7ar" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://tiktok.com/@tounsi7ar" target="_blank" rel="noopener">TikTok</a></div>
+  </div>
+  <p class="copy">© 2026 <span class="bn"></span> · <span data-i="legal"></span></p>
+</div></footer>
+
+<div id="ov"></div>
+<aside id="drawer" aria-label="Panier">
+  <div class="dh"><h3 id="dtitle"></h3><button id="close" aria-label="Fermer">×</button></div>
+  <div class="db" id="cartBody"></div>
+  <div class="sum" id="sum"></div>
+  <form id="form" hidden>
+    <label><span data-i="f_name"></span><input name="name" required autocomplete="name"></label>
+    <label><span data-i="f_phone"></span><input name="phone" required inputmode="numeric" pattern="[0-9]{8}" maxlength="8" placeholder="2X XXX XXX" autocomplete="tel-national"></label>
+    <label><span data-i="f_gov"></span><select name="gov" required id="gov"></select></label>
+    <label><span data-i="f_addr"></span><textarea name="addr" rows="2" required></textarea></label>
+    <div class="cod" data-i="cod"></div>
+    <button class="btn" type="submit" data-i="order"></button>
+  </form>
+  <div class="msg" id="msg"></div>
+</aside>
+
+<script>
+/* ============ CONFIG — edit these ============ */
+const BRAND = "Tounsi 7ar";   // try: "Tounsi 3aych", "Tounsi 7or", "Be Tounsi", "Tounsi be like", "Tounsi n'existi" (hat goes on the first "o")
+const WHATSAPP = "21620000000";
+const FREE_SHIPPING_FROM = 100, SHIPPING = 8;
+const PRODUCTS = [
+ {id:1,img:"images/harissa.jpg",  art:"jar",      fr:"Harissa 7ara",    ar:"هريسة حارة",   s:{fr:"Barcha 7ar",ar:"برشا حار"},            price:9,  bg:"linear-gradient(135deg,#FF5A36,#8E0E1F)"},
+ {id:2,img:"images/tshirt.jpg",   art:"chechia",  fr:"T-shirt Chechia", ar:"تيشورت شاشية", s:{fr:"Tounsi w fakhour",ar:"تونسي وفخور"},   price:29, bg:"linear-gradient(135deg,#8E0E1F,#3D0510)"},
+ {id:3,img:"images/hoodie.jpg",   art:"hannibal", fr:"Sweat Hannibal",  ar:"سويت حنبعل",   s:{fr:"Carthage 814 av. J.-C.",ar:"قرطاج 814 ق.م"}, price:59, bg:"linear-gradient(135deg,#C1121F,#5A0A18)"},
+ {id:4,img:"images/mug.jpg",      art:"bowl",     fr:"Mug Lablebi",     ar:"كوب لبلابي",   s:{fr:"Lablebi w bass",ar:"لبلابي وبس"},        price:16, bg:"linear-gradient(135deg,#D8431C,#7A0C1E)"},
+ {id:5,img:"images/tote.jpg",     art:"chili",    fr:"Tote bag Felfel", ar:"حقيبة فلفل",   s:{fr:"Sahha !",ar:"صحّة!"},                    price:19, bg:"linear-gradient(135deg,#A50F22,#4A0612)"},
+ {id:6,img:"images/stickers.jpg", art:"map",      fr:"Stickers Tunisie",ar:"ملصقات تونس",  s:{fr:"Pack de 10",ar:"10 قطع"},               price:7,  bg:"linear-gradient(135deg,#7A0C1E,#C1121F)"}
+];
+const GOVS=["Ariana","Béja","Ben Arous","Bizerte","Gabès","Gafsa","Jendouba","Kairouan","Kasserine","Kébili","Le Kef","Mahdia","La Manouba","Médenine","Monastir","Nabeul","Sfax","Sidi Bouzid","Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"];
+const CITIES=[{fr:"Tunis",ar:"تونس",lo:10.18,la:36.81,d:"1–2"},{fr:"Sousse",ar:"سوسة",lo:10.64,la:35.83,d:"2"},{fr:"Sfax",ar:"صفاقس",lo:10.76,la:34.74,d:"2"},{fr:"Djerba",ar:"جربة",lo:10.86,la:33.8,d:"3"},{fr:"Tozeur",ar:"توزر",lo:8.13,la:33.92,d:"3–4"},{fr:"Tataouine",ar:"تطاوين",lo:10.45,la:32.93,d:"3–4"}];
+const PTS=[[8.6,36.93],[9.2,37.23],[9.8,37.33],[10.2,37.2],[10.3,36.8],[10.65,36.95],[11,37.08],[11.12,36.88],[10.75,36.65],[10.55,36.4],[10.6,36],[10.75,35.8],[11.05,35.5],[11,35.2],[10.75,34.75],[10.45,34.4],[10.1,33.9],[10.5,33.7],[11,33.7],[11.25,33.3],[11.55,33.15],[10.9,32.6],[10.7,32],[10.1,31.5],[9.55,30.25],[9,31.3],[8.4,32.5],[7.85,33.2],[7.5,34],[8.2,34.5],[8.3,35.2],[8.4,35.9],[8.25,36.5]];
+const xy=(lo,la)=>[(lo-7.4)*50,(37.4-la)*42];
+
+/* ============ TEXTS ============ */
+const T={
+fr:{nav_shop:"Boutique",nav_map:"Livraison",nav_faq:"Questions",cart:"Panier",kick:"Fier. Piquant. Tounsi.",h1:"Barcha 7ar. Barcha Tounsi.",
+ hero_p:"Goodies, vêtements et saveurs qui sentent la harissa et le soleil de Carthage. Livrés partout en Tunisie, payés à la livraison.",
+ cta:"Voir la boutique",pay:"Cash à la livraison",t1:"Paiement à la livraison",t2:"Livraison dans les 24 gouvernorats",t3:"Échange sous 7 jours",
+ map_p:"Touche une ville pour voir le délai de livraison.",deliv:"livraison",days:"jours",shop:"Le menu du jour",
+ story_h:"Hannibal a traversé les Alpes avec des éléphants.",story_p:"Toi, tu veux juste une bonne harissa et un t-shirt qui parle pour toi. On est avec toi, de Bizerte à Tataouine.",
+ f1q:"Comment payer ?",f1a:"À la livraison, en espèces, directement au livreur. Aucun paiement en ligne.",
+ f2q:"Délais et frais de livraison ?",f2a:"1 à 4 jours ouvrables partout en Tunisie. 8 TND, gratuite dès 100 TND.",
+ f3q:"Puis-je échanger un article ?",f3a:"Oui, sous 7 jours si l'article est non porté (hors harissa). Écris-nous sur WhatsApp.",
+ foot:"Fier d'être Tounsi, depuis Tunis.",contact:"Contact",follow:"Suivez-nous",legal:"Prix en dinars tunisiens (TND), TVA incluse.",
+ add:"Ajouter au panier",empty:"Ton panier est vide.",sub:"Sous-total",ship:"Livraison",free:"Offerte",total:"Total",
+ f_name:"Nom et prénom",f_phone:"Téléphone (8 chiffres)",f_gov:"Gouvernorat",f_addr:"Adresse complète",pick:"Choisir…",
+ cod:"Paiement en espèces à la livraison.",order:"Confirmer la commande",sent:"Sahha ! WhatsApp s'ouvre pour envoyer ta commande. On t'appelle pour confirmer.",
+ wa_hi:"Salam, je veux commander chez",wa_cl:"Client",wa_ph:"Tél",wa_ad:"Adresse"},
+ar:{nav_shop:"المتجر",nav_map:"التوصيل",nav_faq:"أسئلة",cart:"السلة",kick:"فخور. حار. تونسي.",h1:"برشا حار. برشا تونسي.",
+ hero_p:"منتجات وملابس ونكهات بنفحة الهريسة وشمس قرطاج. توصيل لكل تونس والدفع عند الاستلام.",
+ cta:"تصفح المتجر",pay:"الدفع عند الاستلام",t1:"الدفع عند الاستلام",t2:"توصيل إلى 24 ولاية",t3:"تبديل خلال 7 أيام",
+ map_p:"المس مدينة لترى مدة التوصيل.",deliv:"التوصيل",days:"أيام",shop:"قائمة اليوم",
+ story_h:"حنبعل عبر جبال الألب بالأفيال.",story_p:"وأنت تريد فقط هريسة طيبة وتيشورت يتكلم عنك. نحن معك، من بنزرت إلى تطاوين.",
+ f1q:"كيف أدفع؟",f1a:"عند الاستلام نقداً للموزّع مباشرة. لا دفع إلكتروني.",
+ f2q:"مدة وتكلفة التوصيل؟",f2a:"من 1 إلى 4 أيام عمل في كامل تونس. 8 د.ت، ومجاني ابتداءً من 100 د.ت.",
+ f3q:"هل يمكنني التبديل؟",f3a:"نعم خلال 7 أيام إذا كان المنتج غير مستعمل (ما عدا الهريسة). راسلنا على واتساب.",
+ foot:"فخورون بأننا تونسيون، من تونس.",contact:"اتصل بنا",follow:"تابعنا",legal:"الأسعار بالدينار التونسي مع الأداء على القيمة المضافة.",
+ add:"أضف إلى السلة",empty:"سلتك فارغة.",sub:"المجموع الفرعي",ship:"التوصيل",free:"مجاني",total:"المجموع",
+ f_name:"الاسم واللقب",f_phone:"الهاتف (8 أرقام)",f_gov:"الولاية",f_addr:"العنوان الكامل",pick:"اختر…",
+ cod:"الدفع نقداً عند الاستلام.",order:"تأكيد الطلب",sent:"صحّة! سيفتح واتساب لإرسال طلبك. سنتصل بك للتأكيد.",
+ wa_hi:"سلام، نحب نطلب من",wa_cl:"الحريف",wa_ph:"الهاتف",wa_ad:"العنوان"}};
+
+/* ============ STATE ============ */
+let lang="fr",cart={};
+try{lang=localStorage.getItem("lang")||"fr";cart=JSON.parse(localStorage.getItem("tcart")||"{}")}catch(e){}
+const $=s=>document.querySelector(s),t=k=>T[lang][k],RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const tnd=n=>n.toFixed(3).replace(".",",")+(lang==="ar"?" د.ت":" TND");
+const save=()=>{try{localStorage.setItem("tcart",JSON.stringify(cart));localStorage.setItem("lang",lang)}catch(e){}};
+
+/* logo: chechia on the first "o" of the name */
+const HAT='<svg class="hat" viewBox="0 0 100 100" aria-hidden="true"><use href="#chechia"/></svg>';
+function logo(n){const i=n.search(/o/i);return i<0?n:n.slice(0,i)+'<span class="ho">'+n[i]+HAT+'</span>'+n.slice(i+1)}
+document.querySelectorAll(".brandlogo").forEach(e=>e.innerHTML=logo(BRAND));
+document.querySelectorAll(".bn").forEach(e=>e.textContent=BRAND);
+$("#mqin").innerHTML=[0,1].map(()=>["Barcha 7ar","Sahha","Ya 3aychek","Tounsi w fakhour","Lablebi w bass","Carthage 814 av. J.-C."].map(x=>`<span>${x} ✦</span>`).join("")).join("");
+
+/* map */
+const mapD="M"+PTS.map(p=>xy(...p).map(n=>n.toFixed(1)).join(" ")).join("L")+"Z";
+function drawMap(){document.querySelectorAll(".mp").forEach(p=>p.setAttribute("d",mapD))}
+function drawCities(){
+  $("#cities").innerHTML=CITIES.map((c,i)=>{const[x,y]=xy(c.lo,c.la);
+    return `<g class="city" tabindex="0" data-c="${i}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle class="ring" r="5"/><circle class="dot" r="4"/></g>`}).join("");
+}
+function showTip(i){const c=CITIES[i],[x,y]=xy(c.lo,c.la),tip=$("#tip");
+  tip.textContent=`${c[lang]} · ${t("deliv")} ${c.d} ${t("days")}`;
+  tip.style.left=(x/210*100)+"%";tip.style.top=(y/305*100)+"%";tip.style.opacity=1}
+$("#mapbox").addEventListener("pointerover",e=>{const g=e.target.closest(".city");if(g)showTip(g.dataset.c)});
+$("#mapbox").addEventListener("focusin",e=>{const g=e.target.closest(".city");if(g)showTip(g.dataset.c)});
+$("#mapbox").addEventListener("pointerleave",()=>$("#tip").style.opacity=0);
+
+/* ============ RENDER ============ */
+function render(){
+  document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  $("#langBtn").textContent=lang==="ar"?"Français":"العربية";
+  document.querySelectorAll("[data-i]").forEach(e=>e.textContent=t(e.dataset.i));
+  $("#products").innerHTML=PRODUCTS.map(p=>{
+    const art=p.art==="map"?'<svg viewBox="0 0 210 305"><path class="mp"/></svg>':`<svg viewBox="0 0 100 100"><use href="#${p.art}"/></svg>`;
+    return `<article class="card"><div class="art" style="background:${p.bg}">${art}<img src="${p.img}" alt="${p[lang]}" loading="lazy" onerror="this.remove()"><span class="badge">${tnd(p.price)}</span></div>
+      <div class="in"><h3>${p[lang]}</h3><span class="tag">${p.s[lang]}</span><button class="btn" onclick="add(${p.id})">${t("add")}</button></div></article>`}).join("");
+  $("#gov").innerHTML=`<option value="">${t("pick")}</option>`+GOVS.map(g=>`<option>${g}</option>`).join("");
+  drawMap();renderCart();
+}
+function totals(){const sub=Object.entries(cart).reduce((s,[id,q])=>s+PRODUCTS.find(p=>p.id==id).price*q,0);
+  const ship=sub===0?0:(sub>=FREE_SHIPPING_FROM?0:SHIPPING);return{sub,ship,total:sub+ship}}
+function renderCart(){
+  const ids=Object.keys(cart);$("#count").textContent=ids.reduce((s,i)=>s+cart[i],0);$("#dtitle").textContent=t("cart");
+  $("#cartBody").innerHTML=ids.length?ids.map(id=>{const p=PRODUCTS.find(x=>x.id==id);
+    return `<div class="line"><span class="n">${p[lang]}<br><small>${tnd(p.price)}</small></span><span class="q"><button onclick="chg(${id},-1)" aria-label="-">−</button><b>${cart[id]}</b><button onclick="chg(${id},1)" aria-label="+">+</button></span></div>`}).join(""):`<p>${t("empty")}</p>`;
+  const x=totals();
+  $("#sum").innerHTML=ids.length?`<div><span>${t("sub")}</span><span>${tnd(x.sub)}</span></div><div><span>${t("ship")}</span><span>${x.ship?tnd(x.ship):t("free")}</span></div><div class="tot"><span>${t("total")}</span><span>${tnd(x.total)}</span></div>`:"";
+  $("#form").hidden=!ids.length;save();
+}
+function add(id){cart[id]=(cart[id]||0)+1;renderCart();openCart()}
+function chg(id,d){cart[id]+=d;if(cart[id]<=0)delete cart[id];renderCart()}
+function openCart(){$("#drawer").classList.add("open");$("#ov").classList.add("open");$("#msg").textContent=""}
+function closeCart(){$("#drawer").classList.remove("open");$("#ov").classList.remove("open")}
+$("#cartBtn").onclick=openCart;$("#close").onclick=closeCart;$("#ov").onclick=closeCart;
+document.addEventListener("keydown",e=>e.key==="Escape"&&closeCart());
+$("#langBtn").onclick=()=>{lang=lang==="fr"?"ar":"fr";render()};
+
+/* ============ HOVER MAGIC ============ */
+const glow=$("#glow");
+document.addEventListener("pointermove",e=>{glow.style.transform=`translate(${e.clientX}px,${e.clientY}px)`});
+const grid=$("#products");
+grid.addEventListener("pointermove",e=>{
+  const c=e.target.closest(".card");if(!c)return;
+  const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+  c.style.setProperty("--mx",x*100+"%");c.style.setProperty("--my",y*100+"%");
+  if(!RM)c.style.transform=`perspective(700px) rotateY(${(x-.5)*12}deg) rotateX(${(.5-y)*12}deg) translateY(-6px)`;
+});
+grid.addEventListener("pointerout",e=>{const c=e.target.closest(".card");if(c&&!c.contains(e.relatedTarget))c.style.transform=""});
+
+/* ============ ORDER → WHATSAPP ============ */
+$("#form").onsubmit=e=>{
+  e.preventDefault();const f=new FormData(e.target),x=totals();
+  const lines=Object.entries(cart).map(([id,q])=>{const p=PRODUCTS.find(p=>p.id==id);return `• ${q} × ${p[lang]} — ${tnd(p.price*q)}`}).join("\n");
+  const text=`${t("wa_hi")} ${BRAND}:\n${lines}\n\n${t("ship")}: ${x.ship?tnd(x.ship):t("free")}\n${t("total")}: ${tnd(x.total)}\n\n${t("wa_cl")}: ${f.get("name")}\n${t("wa_ph")}: +216 ${f.get("phone")}\n${t("f_gov")}: ${f.get("gov")}\n${t("wa_ad")}: ${f.get("addr")}`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`,"_blank");
+  $("#msg").textContent=t("sent");cart={};renderCart();e.target.reset();
+};
+
+document.title=BRAND+" — Barcha 7ar, barcha Tounsi";
+drawCities();render();
+</script>
+</body>
+</html>
